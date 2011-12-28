@@ -1,7 +1,13 @@
 RaudoCMS
 Fácil y rápido CMS en KumbiaPHP.
 
-Un cms que usaremos el pages controller.
+Para los desarrolladores:
+
+Un cms que usara el pages controller para las páginas.
+
+Fases:
+Crear admin para crear, editar y borrar pages de views/pages/.
+...
 
 
 
