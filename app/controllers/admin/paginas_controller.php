@@ -4,7 +4,7 @@
  *
  * Controlador para crear, editar y borrar paginas
  */
-View::template('admin/admin');
+
 
 class PaginasController extends AppController 
 {

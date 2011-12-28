@@ -15,6 +15,18 @@ class AppController extends Controller {
 
 	final protected function initialize()
 	{
+		if($this->module_name == 'admin'){
+			Load::lib('session');
+                	Load::lib('simple_auth');
+			
+			if(SimpleAuth::isAuth()){
+				View::template('admin/admin');
+			} else {
+				//session_start();
+				View::select(NULL, 'admin/login');
+				return FALSE;
+			}
+		}
 	}
 
 	final protected function finalize()
