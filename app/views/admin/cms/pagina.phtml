@@ -1,20 +1,28 @@
 
 <form action="/admin/pagina" method="post">
-	<textarea class="wymeditor" name="codigo"><?php echo $codigo; ?></textarea>
-	<select name="accion">
-		<option value="editar">Editar</option>
-		<option value="borrar">Borrar</option>
-	</select>
-	<input name="pagina" value="<?php echo $pagina; ?>" type="hidden">
-	<button class="wymupdate type="submit">Enviar</button>
-	<button class="codigo" type="button">Codigo</button>
+	<p>
+		<label>DIR:</label>
+		<input name="dir" value="<?php echo dirname( $pagina ); ?>" size="69" type="text">
+	</p>
+	<p>
+		<label>PÁGINA:</label>
+		<input name="pagina" value="<?php echo basename( $pagina ); ?>" size="15" type="text">
+	</p>
+	<p>
+		<textarea class="wymeditor" name="codigo"><?php echo $codigo; ?></textarea>
+	</p>
+	<p>
+		<button class="wymupdate type="submit">Salvar</button>
+		<button class="codigo" type="button">Codigo</button>
+	</p>
 </form>
 
 <script type="text/javascript">
 $( 'button.codigo' ).on( 'click', function()
 {
-	var dir = $( 'input[name="pagina"]' ).val();
-	location = '/admin/cms/codigo?dir='+dir;
+	var dir = $( 'input[name="dir"]' ).val();
+	var pagina = $( 'input[name="pagina"]' ).val();
+	location = '/admin/cms/codigo?dir='+dir+'/'+pagina;
 });
 $( '.wymeditor' ).wymeditor();
 </script>
