@@ -17,10 +17,10 @@ class AppController extends Controller {
 	{
 		if($this->module_name == 'admin'){
 			Load::lib('session');
-                	Load::lib('simple_auth');
+            Load::lib('simple_auth');
 			
 			if(SimpleAuth::isAuth()){
-				View::template('admin/admin');
+				View::template('admin/cms');
 			} else {
 				//session_start();
 				View::select(NULL, 'admin/login');

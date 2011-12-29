@@ -1,0 +1,15 @@
+
+<form action="/admin/pagina" method="post">
+	<textarea class="wymeditor" name="codigo"><?php echo $codigo; ?></textarea>
+	<select name="accion">
+		<option value="editar">Editar</option>
+		<option value="borrar">Borrar</option>
+	</select>
+	<input name="pagina" value="<?php echo $pagina; ?>" type="hidden">
+	<button class="wymupdate type="submit">Enviar</button>
+</form>
+
+<script type="text/javascript">
+/* WYSIWYG */
+$( '.wymeditor' ).wymeditor();
+</script>

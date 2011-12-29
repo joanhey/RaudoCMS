@@ -1,0 +1,18 @@
+<?php
+
+if ( $up and $dad <> '' ) echo '<li class="directory up"><a href="#" rel="' . realpath( $dad . '/..' ) . '">..</a></li>';
+
+foreach ( $items as $k => $v )
+{
+	if ( is_array( $v ) )
+	{
+		$dir = basename( $k );
+		echo "<li class=\"directory collapsed\"><a href=\"#\" rel=\"$k\">$dir</a></li>";
+	}
+	else
+	{
+		$pathinfo = pathinfo( $v );
+		$ext = ! empty($pathinfo['extension']) ? $pathinfo['extension'] : 'txt';
+		echo "<li class=\"file ext_$ext\"><a href=\"#\" rel=\"$dad/$v\">$v</a></li>";
+	}
+}
