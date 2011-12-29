@@ -31,6 +31,7 @@ class CmsController extends AppController
 		$this->pagina = $_REQUEST['dir'];
 		$this->codigo = file_get_contents( $this->pagina );
 		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
+		$this->version = Load::model( 'versiones' )->leyendo( $this->pagina, $this->codigo );
 	}
 	
 	public function paginas()

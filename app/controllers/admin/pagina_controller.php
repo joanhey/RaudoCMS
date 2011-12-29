@@ -22,29 +22,9 @@ class PaginaController extends AppController
 	{
 		if ( strstr( $post['dir'], APP_PATH . 'views/pages' ) )
 		{
-			if ( _fs::updateFile( "{$post['dir']}/{$post['pagina']}", $post['codigo'] ) )
-			{
-				$_SESSION['flash'] = Flash::valid( 'Página actualizada' );
-			}
-			else
-			{
-				$_SESSION['flash'] = Flash::error( 'Error editando' );
-			}
+			Load::model( 'versiones' )->editando( $post['dir'], $post['pagina'], $post['codigo'] );			
 			return Router::redirect( "/admin/cms/index?dir={$post['dir']}/{$post['pagina']}" );
 		}
 		return Router::redirect( '/admin/cms' );
-	}
-        
-    public function borrar( $post )
-	{
-		/*if ( _fs::deleteFile( $post['pagina'] ) )
-		{
-			$_SESSION['flash'] = Flash::valid( 'Página borrada' );
-		}
-		else
-		{
-			$_SESSION['flash'] = Flash::error( 'Error borrando' );
-		}
-		return Router::redirect( '/admin/cms/index?dir=' . basename( $post['pagina'] ) );*/
 	}
 }
