@@ -2,27 +2,37 @@
 
 class Versiones
 {
-	public function leyendo( $pagina, $codigo )
+	public function leyendo( $dir, $pagina, $codigo )
     {
+		$raiz = APP_PATH  . 'views/pages';
+		$carpetas = str_replace( $raiz, '', $dir );
+		$carpetas = trim( $carpetas, '/' );
+		if ( $carpetas ) $carpetas .= '/';
+
 		$pagina = basename( $pagina );
-		if ( file_exists( APP_PATH . "temp/versiones/$pagina" ) )
+		if ( file_exists( APP_PATH . "temp/versiones/$carpetas$pagina" ) )
 		{
-			$versiones = glob( APP_PATH . "temp/versiones/$pagina/*" );
+			$versiones = glob( APP_PATH . "temp/versiones/$carpetas$pagina/*" );
 			return count( $versiones );
 		}
 		else
 		{
-			$log = mkdir( APP_PATH . "temp/versiones/$pagina", 0777 );
+			$log = mkdir( APP_PATH . "temp/versiones/$carpetas$pagina", 0777, 1 );
 			return '0';
 		}
 	}
 	
 	public function editando( $dir, $pagina, $codigo )
     {
-		$ver = $this->leyendo( "$dir/$pagina", $codigo );
+		$raiz = APP_PATH  . 'views/pages';
+		$carpetas = str_replace( $raiz, '', $dir );
+		$carpetas = trim( $carpetas, '/' );
+		if ( $carpetas ) $carpetas .= '/';
+		
+		$ver = $this->leyendo( $dir, $pagina, $codigo );
 		++$ver;
 		$codigo_viejo = _fs::readFile( "$dir/$pagina" );
-		_fs::createFile( APP_PATH . "temp/versiones/$pagina/$ver", $codigo_viejo );
+		_fs::createFile( APP_PATH . "temp/versiones/$carpetas$pagina/$ver", $codigo_viejo );
 		
 		if ( _fs::updateFile( "$dir/$pagina", $codigo ) )
 		{

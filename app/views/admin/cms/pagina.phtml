@@ -2,11 +2,11 @@
 <form action="/admin/pagina" method="post">
 	<p>
 		<label>DIR:</label>
-		<input name="dir" value="<?php echo dirname( $pagina ); ?>" size="69" type="text">
+		<input name="dir" value="<?php echo $dir; ?>" size="69" type="text">
 	</p>
 	<p>
 		<label>PÁGINA:</label>
-		<input name="pagina" value="<?php echo basename( $pagina ); ?>" size="15" type="text">
+		<input name="pagina" value="<?php echo $pagina; ?>" size="15" type="text">
 	</p>
 	<p>
 		<label>VERSIÓN:</label>

@@ -28,10 +28,12 @@ class CmsController extends AppController
 	
 	public function pagina()
 	{
-		$this->pagina = $_REQUEST['dir'];
-		$this->codigo = file_get_contents( $this->pagina );
+		// $_REQUEST['dir'] deberia llamarse item o similar
+		$this->dir = dirname( $_REQUEST['dir'] );
+		$this->pagina = basename( $_REQUEST['dir'] );
+		$this->codigo = file_get_contents( $_REQUEST['dir'] );
 		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
-		$this->version = Load::model( 'versiones' )->leyendo( $this->pagina, $this->codigo );
+		$this->version = Load::model( 'versiones' )->leyendo( $this->dir, $this->pagina, $this->codigo );
 	}
 	
 	public function paginas()
