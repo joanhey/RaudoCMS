@@ -1,0 +1,59 @@
+
+<div id="file_manager">
+	<ul class="file_manager"></ul>
+</div>          
+<script type="text/javascript">
+get_dir( '<?php echo $dir; ?>' );
+function get_dir( dir )
+{
+	if ( dir ) // AQUI FALTA COMPARAR DIR CON LA BASE PARA NO PONER LOS ..
+	{
+		$( '#file_manager ul' ).load( '/admin/cms/paginas?up=1&dir='+dir );
+		
+		if ( dir ) // AQUI FALTA COMPROBAR QUE ES UN ARCHIVO
+		{
+			$( function()
+			{
+				$( '#codigo' ).load( '/admin/cms/codigo?dir='+dir );
+				$( '#pagina' ).load( '/admin/cms/pagina?dir='+dir );
+			});
+		}
+	}
+	else
+	{
+		$( '#file_manager ul' ).load( '/admin/cms/paginas' );
+	}
+	
+    $( '#file_manager' ).css( { top:'100px', left:'100px' } ).fadeIn( 'normal' );
+        
+    $( '.directory > a' ).live( 'click', function( e )
+    {
+        e.preventDefault();
+        
+        var li = $( this ).parent();
+        
+        if(  li.hasClass( 'up' )  )
+        {
+            $( '#file_manager ul *' ).remove();
+            $( '#file_manager ul' ).load( '/admin/cms/paginas?up=1&dir='+this.rel );
+        }
+        else if(  li.hasClass( 'collapsed' )  )
+        {
+            li.removeClass( 'collapsed' ).addClass( 'expanded' );
+            li.append( '<ul class="file_manager"></ul>' ).find( 'ul' ).load( '/admin/cms/paginas?dir='+this.rel );
+        }
+        else
+        {
+            li.addClass( 'collapsed' ).removeClass( 'expanded' );
+            li.find( 'ul' ).remove();
+        }
+    } );
+        
+    $( '.file > a' ).live( 'click', function( e )
+    {
+        e.preventDefault();
+		$( '#codigo' ).load( '/admin/cms/codigo?dir='+this.rel );
+		$( '#pagina' ).load( '/admin/cms/pagina?dir='+this.rel );
+    } );
+}    
+</script>
