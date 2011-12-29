@@ -2,7 +2,7 @@
 
 class Versiones
 {
-	public function leyendo( $dir, $pagina, $codigo )
+	public function leyendo( $dir, $pagina )
     {
 		$raiz = APP_PATH  . 'views/pages';
 		$carpetas = str_replace( $raiz, '', $dir );
