@@ -24,5 +24,9 @@ $( 'button.codigo' ).on( 'click', function()
 	var pagina = $( 'input[name="pagina"]' ).val();
 	location = '/admin/cms/codigo?dir='+dir+'/'+pagina;
 });
-$( '.wymeditor' ).wymeditor();
+$( '.wymeditor' ).wymeditor(
+{
+	stylesheet: 'web.css',
+    skin: 'twopanels'
+});
 </script>
