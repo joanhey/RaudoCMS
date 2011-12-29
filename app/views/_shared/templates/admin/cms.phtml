@@ -3,9 +3,9 @@
     <head>
         <meta charset="<?php echo APP_CHARSET ?>" />
         <title>RaudoCMS</title>
-        <?php Tag::css('cms') ?>
+        <?php Tag::css( 'cms' ) ?>
         <?php echo Html::includeCss() ?>
-  		<?php echo Tag::js( 'jquery/jquery.min' ); ?>
+ 		<?php echo Tag::js( 'jquery/jquery.min' ); ?>
   		<?php echo Tag::js( 'wymeditor/jquery.wymeditor' ); ?>
     </head>
     <body>
@@ -18,11 +18,6 @@
             <?php View::partial( 'admin/file_manager', false, get_object_vars( $controller ) ); ?>
             <hr />
        </aside>
-        <section>
-            <h3>Código:</h3>
-            <div id="codigo"></div>
-            <hr />
-       </section>
         <section>
             <h3>Página:</h3>
             <div id="pagina"></div>

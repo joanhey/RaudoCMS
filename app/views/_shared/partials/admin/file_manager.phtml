@@ -14,7 +14,6 @@ function get_dir( dir )
 		{
 			$( function()
 			{
-				$( '#codigo' ).load( '/admin/cms/codigo?dir='+dir );
 				$( '#pagina' ).load( '/admin/cms/pagina?dir='+dir );
 			});
 		}
@@ -52,7 +51,6 @@ function get_dir( dir )
     $( '.file > a' ).live( 'click', function( e )
     {
         e.preventDefault();
-		$( '#codigo' ).load( '/admin/cms/codigo?dir='+this.rel );
 		$( '#pagina' ).load( '/admin/cms/pagina?dir='+this.rel );
     } );
 }    

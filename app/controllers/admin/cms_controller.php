@@ -23,11 +23,14 @@ class CmsController extends AppController
 		$this->pagina = $_REQUEST['dir'];
 		$this->codigo = file_get_contents( $this->pagina );
 		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
+		View::template( NULL );
 	}
 	
 	public function pagina()
 	{
-		$this->pagina = file_get_contents( $_REQUEST['dir'] );
+		$this->pagina = $_REQUEST['dir'];
+		$this->codigo = file_get_contents( $this->pagina );
+		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
 	}
 	
 	public function paginas()

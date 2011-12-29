@@ -1,15 +1,32 @@
 
-<form action="/admin/pagina" method="post">
-	<textarea class="wymeditor" name="codigo"><?php echo $codigo; ?></textarea>
-	<select name="accion">
-		<option value="editar">Editar</option>
-		<option value="borrar">Borrar</option>
-	</select>
-	<input name="pagina" value="<?php echo $pagina; ?>" type="hidden">
-	<button class="wymupdate type="submit">Enviar</button>
-</form>
+<style type="text/css" media="screen">
+body
+{
+	overflow: hidden;
+}
 
-<script type="text/javascript">
-/* WYSIWYG */
-$( '.wymeditor' ).wymeditor();
+#editor
+{ 
+	margin: 0;
+	position: realtive;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+</style>
+
+<pre id="editor"><?php echo $codigo; ?></pre>
+
+<?php echo Tag::js( 'src/ace' ); ?>
+<?php echo Tag::js( 'src/theme-twilight' ); ?>
+<?php echo Tag::js( 'src/mode-php' ); ?>
+<script>
+window.onload = function() {
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    
+    var JavaScriptMode = require("ace/mode/php").Mode;
+    editor.getSession().setMode(new JavaScriptMode());
+};
 </script>
