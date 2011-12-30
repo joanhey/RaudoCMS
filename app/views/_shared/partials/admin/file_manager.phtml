@@ -1,9 +1,11 @@
 
 <div id="file_manager">
 	<ul class="file_manager"></ul>
-</div>          
-<script type="text/javascript">
+</div>
+
+<script>
 get_dir( '<?php echo $dir; ?>' );
+
 function get_dir( dir )
 {
 	if ( dir ) // AQUI FALTA COMPARAR DIR CON LA BASE PARA NO PONER LOS ..

@@ -18,12 +18,12 @@ class CmsController extends AppController
 		$this->dir = empty( $_REQUEST['dir'] ) ? '' : $_REQUEST['dir'];
 	}
 	
-	public function codigo()
+	public function codigo( $vista )
 	{
 		$this->pagina = $_REQUEST['dir'];
 		$this->codigo = file_get_contents( $this->pagina );
 		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
-		View::template( NULL );
+		View::select( $vista, NULL );
 	}
 	
 	public function pagina()

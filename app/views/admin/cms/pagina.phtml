@@ -17,20 +17,29 @@
 	</p>
 	<p>
 		<button class="wymupdate type="submit">Salvar</button>
-		<button class="codigo" type="button">Codigo</button>
+		<button class="ace" type="button">Ace</button>
+		<button class="codemirror" type="button">Codemirror</button>
 	</p>
 </form>
 
-<script type="text/javascript">
-$( 'button.codigo' ).on( 'click', function()
-{
-	var dir = $( 'input[name="dir"]' ).val();
-	var pagina = $( 'input[name="pagina"]' ).val();
-	location = '/admin/cms/codigo?dir='+dir+'/'+pagina;
-});
+<script>
 $( '.wymeditor' ).wymeditor(
 {
 	stylesheet: 'web.css',
     skin: 'twopanels'
+});
+// BOTON ACE
+$( 'button.ace' ).on( 'click', function()
+{
+	var dir = $( 'input[name="dir"]' ).val();
+	var pagina = $( 'input[name="pagina"]' ).val();
+	location = '/admin/cms/codigo/ace?dir='+dir+'/'+pagina;
+});
+// BOTON CODEMIRROR
+$( 'button.codemirror' ).on( 'click', function()
+{
+	var dir = $( 'input[name="dir"]' ).val();
+	var pagina = $( 'input[name="pagina"]' ).val();
+	location = '/admin/cms/codigo/codemirror?dir='+dir+'/'+pagina;
 });
 </script>
