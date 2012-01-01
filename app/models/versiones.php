@@ -2,14 +2,12 @@
 
 class Versiones
 {
-	public function leyendo( $dir, $pagina )
+	public function leyendo( $get )
     {
-		$raiz = APP_PATH  . 'views/pages';
-		$carpetas = str_replace( $raiz, '', $dir );
-		$carpetas = trim( $carpetas, '/' );
+		$carpetas = dirname( $get['f'] );
 		if ( $carpetas ) $carpetas .= '/';
 
-		$pagina = basename( $pagina );
+		$pagina = basename( $get['f'] );
 		if ( file_exists( APP_PATH . "temp/versiones/$carpetas$pagina" ) )
 		{
 			$versiones = glob( APP_PATH . "temp/versiones/$carpetas$pagina/*" );

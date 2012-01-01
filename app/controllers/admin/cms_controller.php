@@ -23,7 +23,7 @@ class CmsController extends AppController
 	{
 		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
 		$this->ruta = $_GET['f'];
-		$this->version = 2;
+		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
 	}
 	
 	/*public function codigo( $vista )
