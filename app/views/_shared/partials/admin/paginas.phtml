@@ -1,0 +1,30 @@
+<?php
+
+View::helpers( 'tree' );
+
+echo _tree( $ficheros );
+
+
+/*if ( $a['directorio'] and $a['directorio'] <> '/' ) echo "<li class=\"directory up\"><a href=\"?d={$a['padre']}\">..</a></li>";
+
+if ( $a['ficheros'] )
+{
+	foreach ( $a['ficheros'] as $k => $v )
+	{
+		if ( is_array( $v ) )
+		{
+			$k = basename( $k );
+			echo "<li class=\"directory collapsed\"><a href=\"?d={$a['directorio']}$k/\">$k/</a></li>";
+		}
+		else
+		{
+			$pathinfo = pathinfo( $v );
+			$ext = ! empty( $pathinfo['extension'] ) ? $pathinfo['extension'] : 'txt';
+			echo "<li class=\"file ext_$ext\"><a href=\"?d={$a['directorio']}/&f=$v\">$v</a></li>";
+		}
+	}
+}
+else
+{
+	echo 'Vacio';	
+}*/
