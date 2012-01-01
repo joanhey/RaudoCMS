@@ -2,10 +2,16 @@
 
 class Ficheros
 {
-	public function ver( $get )
+	public function leerDirectorio()
     {
 		// CONTENIDO DEL DIRECTORIO
 		return _fs::readDirs( APP_PATH . "views/pages/" );
+	}
+	
+	public function leerFichero( $get )
+    {
+		// CONTENIDO DEL FICHERO
+		return _fs::readFile( APP_PATH . "views/pages/{$get['f']}" );
 	}
 	
 	

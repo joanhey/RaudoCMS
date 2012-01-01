@@ -15,7 +15,15 @@ class CmsController extends AppController
 
 	public function index()
 	{
-		$this->ficheros = Load::model( 'ficheros' )->ver();
+		$this->ficheros = Load::model( 'ficheros' )->leerDirectorio();
+		$this->raiz = APP_PATH . 'views/pages/';
+	}
+
+	public function ver()
+	{
+		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
+		$this->ruta = $_GET['f'];
+		$this->version = 2;
 	}
 	
 	/*public function codigo( $vista )

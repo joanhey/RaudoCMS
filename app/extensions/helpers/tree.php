@@ -1,22 +1,24 @@
 <?php
 
-function _tree( $a )
+function _tree( $ficheros, $raiz )
 {
-	#_::stop($a);
-	if ( empty( $a ) ) return;
+	#_::stop($ficheros);
+	if ( empty( $ficheros ) ) return;
 	
 	$s = '';
-	foreach ( $a as $k => $v )
+	$directorio = '';
+	foreach ( $ficheros as $k => $v )
 	{
 		if ( is_array( $v ) or ! $v )
 		{
 			$s .= "<li>" . basename( $k ) . "/</li>";
-			$s .= _tree( $v );
-			
+			$s .= _tree( $v, $raiz );	
+			$directorio .= str_replace( $raiz, '', $k );
 		}
 		else
 		{
-			$s .= "<li>$v</li>";
+			
+			$s .= "<li><a href=\"admin/cms/ver?f=$directorio/$v\">$v</a></li>";
 		}
 	}
 	return "<ul id=\"$k\">$s</ul>";

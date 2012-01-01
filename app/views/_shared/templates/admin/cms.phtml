@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <base href="/RaudoCMS/" />
         <meta charset="<?php echo APP_CHARSET ?>" />
         <title>RaudoCMS</title>
         <?php Tag::css( 'cms' ) ?>
@@ -13,14 +14,9 @@
             <h1>RaudoCMS | Administración</h1>
             <hr />
         </header>
-        <aside>
-            <h3>Páginas:</h3>
-            <?php View::partial( 'admin/paginas', false, get_object_vars( $controller ) ); ?>
-            <hr />
-        </aside>
         <section>
             <h3>Página:</h3>
-            <div id="pagina"></div>
+            <div id="pagina"><?php View::content(); ?></div>
             <hr />
         </section>
         <footer>
