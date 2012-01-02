@@ -24,15 +24,11 @@ $( '.wymeditor' ).wymeditor(
 // BOTON ACE
 $( 'button.ace' ).on( 'click', function()
 {
-	var dir = $( 'input[name="dir"]' ).val();
-	var pagina = $( 'input[name="pagina"]' ).val();
-	location = '/admin/cms/codigo/ace?dir='+dir+'/'+pagina;
+	location = 'admin/cms/ver/ace?f=<?php echo $_GET['f']; ?>';
 });
 // BOTON CODEMIRROR
 $( 'button.codemirror' ).on( 'click', function()
 {
-	var dir = $( 'input[name="dir"]' ).val();
-	var pagina = $( 'input[name="pagina"]' ).val();
-	location = '/admin/cms/codigo/codemirror?dir='+dir+'/'+pagina;
+	location = 'admin/cms/ver/codemirror?f=<?php echo $_GET['f']; ?>';
 });
 </script>

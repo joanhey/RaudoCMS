@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CodeMirror</title>
+    <base href="/RaudoCMS/" />
     <meta charset="utf-8" />
-    <script src=/codemirror/lib/codemirror.js></script>
-    <script src=/codemirror/mode/xml/xml.js></script>
-    <script src=/codemirror/mode/codemirror/codemirror.js></script>
-    <script src=/codemirror/mode/css/css.js></script>
-    <script src=/codemirror/mode/htmlmixed/htmlmixed.js></script>
-    <link rel=stylesheet href=/codemirror/lib/codemirror.css />
-    <link rel=stylesheet href=/codemirror/doc/docs.css />
+    <title>CodeMirror</title>
+    <script src=codemirror/lib/codemirror.js></script>
+    <script src=codemirror/mode/xml/xml.js></script>
+    <script src=codemirror/mode/codemirror/codemirror.js></script>
+    <script src=codemirror/mode/css/css.js></script>
+    <script src=codemirror/mode/htmlmixed/htmlmixed.js></script>
+    <link rel=stylesheet href=codemirror/lib/codemirror.css />
+    <link rel=stylesheet href=codemirror/doc/docs.css />
     <style>
       .CodeMirror {
         float: left;
@@ -27,7 +28,7 @@
   </head>
   <body>
     <h1>CodeMirror: HTML5 preview</h1>
-    <textarea id=code name=code><?php echo $codigo; ?></textarea>
+    <textarea id=code name=code><?php echo $fichero; ?></textarea>
     <iframe id=preview></iframe>
     <script>
       var delay;

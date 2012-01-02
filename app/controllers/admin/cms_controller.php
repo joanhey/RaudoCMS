@@ -19,10 +19,11 @@ class CmsController extends AppController
 		$this->raiz = APP_PATH . 'views/pages/';
 	}
 
-	public function ver()
+	public function ver( $vista='' )
 	{
 		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
 		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
+		if ( preg_match( '/(ace|codemirror)/', $vista ) ) View::select( $vista, NULL );
 	}
 
     public function editar()
