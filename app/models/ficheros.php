@@ -8,10 +8,8 @@ class Ficheros
 		return _fs::readDirs( APP_PATH . "views/pages/" );
 	}
 	
-	public function leerFichero( $parameters )
+	public function leerFichero( $pagina )
     {
-		$pagina = join( '/', $parameters );		
-		
 		// CONTENIDO DEL FICHERO
 		return _fs::readFile( APP_PATH . "views/pages/$pagina" );
 	}

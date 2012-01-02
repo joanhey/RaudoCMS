@@ -31,15 +31,20 @@ class CmsController extends AppController
 
     public function editar()
 	{			
-		if ( ! empty( $_POST['codigo'] ) )
+		if ( ! empty( $_POST['pagina'] ) and ! empty( $_POST['codigo'] ) )
 		{
-			Load::model( 'versiones' )->editando( $this->parameters, $_POST );			
+			Load::model( 'versiones' )->editando( $_POST['pagina'], $_POST['codigo'] );			
+			$this->fichero = Load::model( 'ficheros' )->leerFichero( $_POST['pagina'] );
+			$this->version = Load::model( 'versiones' )->leyendo( $_POST['pagina'] );
+			$this->pagina = $_POST['pagina'];		
 		}
-
-		$this->pagina = join( '/', $this->parameters );		
-		$this->fichero = Load::model( 'ficheros' )->leerFichero( $this->parameters );
-		$this->version = Load::model( 'versiones' )->leyendo( $this->parameters );
-		
+		else
+		{
+			$pagina = join( '/', $this->parameters );		
+			$this->pagina = $pagina;		
+			$this->fichero = Load::model( 'ficheros' )->leerFichero( $pagina );
+			$this->version = Load::model( 'versiones' )->leyendo( $pagina );
+		}
 		View::select( 'codemirror' );
 	}
 	

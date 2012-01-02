@@ -2,49 +2,39 @@
 
 class Versiones
 {
-	public function leyendo( $parameters )
+	public function leyendo( $pagina )
     {
-		$ruta = join( '/', $parameters );		
-		
-		$carpetas = dirname( $ruta );
-		if ( $carpetas ) $carpetas .= '/';
-
-		$pagina = basename( $ruta );
-
-		if ( file_exists( APP_PATH . "temp/versiones/$carpetas$pagina" ) )
+		if ( file_exists( APP_PATH . "temp/versiones/$pagina" ) )
 		{
-			$versiones = glob( APP_PATH . "temp/versiones/$carpetas$pagina/*" );
+			$versiones = glob( APP_PATH . "temp/versiones/$pagina/*" );
 			return count( $versiones );
 		}
 		else
 		{
-			$log = mkdir( APP_PATH . "temp/versiones/$carpetas$pagina", 0777, 1 );
+			$log = mkdir( APP_PATH . "temp/versiones/$pagina", 0777, 1 );
 			return '0';
 		}
 	}
 	
-	public function editando( $parameters, $post )
+	public function editando( $pagina, $codigo )
     {
-		$ruta = join( '/', $parameters );		
+		# SEGURIDAD: .. fuera y mas de una barra a una
+		$pagina = str_replace( '..', '', $pagina );
+		$pagina = preg_replace( '/\/{2,}/', '/', $pagina );	
 		
-		$carpetas = dirname( $ruta );
-		if ( $carpetas ) $carpetas .= '/';
-
-		$pagina = basename( $ruta );
-		
-		$ver = $this->leyendo( $parameters );
+		$ver = $this->leyendo( $pagina );
 		++$ver;
 
-		$codigo_viejo = Load::model( 'ficheros' )->leerFichero( $parameters );
-		_fs::createFile( APP_PATH . "temp/versiones/$carpetas$pagina/$ver", $codigo_viejo );
+		$codigo_viejo = Load::model( 'ficheros' )->leerFichero( $pagina );
+		_fs::createFile( APP_PATH . "temp/versiones/$pagina/$ver", $codigo_viejo );
 		
-		if ( _fs::updateFile( APP_PATH . "views/pages/$ruta", $post['codigo'] ) )
+		if ( _fs::saveFile( APP_PATH . "views/pages/$pagina", $codigo ) )
 		{
-			$_SESSION['flash'] = Flash::valid( 'Página actualizada' );
+			$_SESSION['flash'] = Flash::valid( 'Página salvada' );
 		}
 		else
 		{
-			$_SESSION['flash'] = Flash::error( 'Error editando' );
+			$_SESSION['flash'] = Flash::error( 'Error salvando' );
 		}
 	}
 }

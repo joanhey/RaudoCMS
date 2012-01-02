@@ -29,10 +29,13 @@
 		</style>
 	</head>
 	<body>
-		<h2><?php echo $pagina; ?></h2>
 		<form action="admin/cms/editar/<?php echo $pagina; ?>" method="post">
 			<p>
-				<label>VERSIÓN:</label>
+				<label>Pagina:</label>
+				<input name="pagina" type="text" value="<?php echo $pagina; ?>" />
+			</p>
+			<p>
+				<label>Versión:</label>
 				<?php echo ++$version; ?>
 			</p>
 			<p>

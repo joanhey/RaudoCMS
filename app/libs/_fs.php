@@ -43,20 +43,10 @@ class _fs
 		return _str::eol_( self::readFile( $file ), $test );
 	}
 	
-    static public function createDir($path)
+	# 2012
+    static public function createDir( $path, $mode=0777 )
     {
-        $path = trim($path, '/');
-        $dirs = explode('/', $path);
-        
-        $path = '';    
-        foreach ($dirs as $dir)
-        {
-            $path .= '/' . $dir;
-                        
-            if ( file_exists('/' . $path) ) continue;
-
-            mkdir($path);
-        }
+       mkdir( $path, $mode, 1 );
     }
 	
     static public function readDir($dir, $and=array())
@@ -110,14 +100,29 @@ class _fs
         return file_get_contents($file);
     }
 	
-    static public function createFile($file, $data='')
+	# 2012
+    static public function createFile( $file, $data='' )
     {
-        return file_put_contents($file, $data);
+		if ( file_exists( $file ) ) return $file . ' exists!';
+
+		$dir = dirname( $file );
+		if ( ! file_exists( $dir ) ) self::createDir( $dir );
+		
+        return file_put_contents( $file, $data );
 	}
 	
-    static public function updateFile($file, $data)
+	# 2012
+    static public function updateFile( $file, $data )
     {
-        return file_put_contents($file, $data);
+		if ( ! file_exists( $file ) ) return $file . ' no exists!';
+	
+		return file_put_contents( $file, $data );
+    }
+	
+	# 2012
+    static public function saveFile( $file, $data )
+    {
+		return file_exists( $file ) ? self::updateFile( $file, $data ) : self::createFile( $file, $data );
     }
 	
     static public function deleteFile($file)
