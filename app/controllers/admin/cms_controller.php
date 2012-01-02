@@ -10,33 +10,54 @@ class CmsController extends AppController
 {
 	protected function before_filter()
 	{
+	    $this->limit_params = false;
+		
 		if ( Input::isAjax() ) View::template( NULL );
     }
 
 	public function index()
 	{
-		$this->dir = empty( $_REQUEST['dir'] ) ? '' : $_REQUEST['dir'];
+		$this->ficheros = Load::model( 'ficheros' )->leerDirectorio();
 	}
-	
-	public function codigo()
+
+	public function ver()
 	{
-		$this->pagina = $_REQUEST['dir'];
-		$this->codigo = file_get_contents( $this->pagina );
-		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
+		$pagina = join( '/', $this->parameters );		
+		$pagina = basename( $pagina, '.phtml' );
+		
+		View::setPath( 'pages/' );
+		View::select( $pagina, NULL );
 	}
-	
-	public function pagina()
-	{
-		$this->pagina = file_get_contents( $_REQUEST['dir'] );
+
+    public function editar()
+	{			
+		if ( ! empty( $_POST['pagina'] ) and ! empty( $_POST['codigo'] ) )
+		{
+			Load::model( 'ficheros' )->salvarFichero( $_POST['pagina'], $_POST['codigo'] );			
+			$this->fichero = Load::model( 'ficheros' )->leerFichero( $_POST['pagina'] );
+			$this->version = Load::model( 'versiones' )->obtenerVersion( $_POST['pagina'] );
+			$this->pagina = $_POST['pagina'];		
+		}
+		else
+		{
+			$pagina = join( '/', $this->parameters );
+			$this->fichero = ( $pagina ) ? Load::model( 'ficheros' )->leerFichero( $pagina ) : '';
+			$this->version = ( $pagina ) ? Load::model( 'versiones' )->obtenerVersion( $pagina ) : '';
+			$this->pagina = ( $pagina ) ? $pagina : '';		
+		}
+		View::select( 'codemirror' );
 	}
-	
-	public function paginas()
-	{
-		if ( empty( $_REQUEST['dir'] ) ) $_REQUEST['dir'] = APP_PATH . 'views/pages';
-		$dir = is_dir( $_REQUEST['dir'] ) ? $_REQUEST['dir'] : dirname( $_REQUEST['dir'] );
-		$dir = '/' . ltrim( $dir, '/' );
-		$this->items = _fs::readDir( $dir );
-		$this->dad = $dir == '/' ? '' : $dir;
-		$this->up = ( empty( $_REQUEST['up'] ) or $_REQUEST['dir'] == APP_PATH . 'views/pages' )? 0 : 1;
+
+    public function borrar()
+	{			
+		$pagina = join( '/', $this->parameters );
+		if ( $pagina )
+		{
+			Load::model( 'ficheros' )->borrarFichero( $pagina );			
+			$this->fichero = '';
+			$this->version = '';
+			$this->pagina = '';		
+		}
+		View::select( 'codemirror' );
 	}
 }

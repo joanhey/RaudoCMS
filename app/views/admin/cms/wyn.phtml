@@ -1,0 +1,22 @@
+
+<h2><?php echo $pagina; ?></h2>
+<form action="admin/cms/editar/<?php echo $pagina; ?>" method="post">
+	<p>
+		<label>VERSIÓN:</label>
+		<?php echo ++$version; ?>
+	</p>
+	<p>
+		<textarea class="wymeditor" name="codigo"><?php echo $fichero; ?></textarea>
+	</p>
+	<p>
+		<button class="wymupdate type="submit">Salvar</button>
+	</p>
+</form>
+
+<script>
+$( '.wymeditor' ).wymeditor(
+{
+	stylesheet: 'web.css',
+    skin: 'twopanels'
+});
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<base href="/RaudoCMS/" />
+		<meta charset="utf-8" />
+		<title>CodeMirror</title>
+		<script src="codemirror/lib/codemirror.js"></script>
+		<script src="codemirror/mode/xml/xml.js"></script>
+		<script src="codemirror/mode/codemirror/codemirror.js"></script>
+		<script src="codemirror/mode/css/css.js"></script>
+		<script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+		<link rel=stylesheet href="codemirror/lib/codemirror.css" />
+		<link rel=stylesheet href="codemirror/doc/docs.css" />
+		<style>
+		.CodeMirror
+		{
+			float: left;
+			width: 50%;
+			border: 1px solid black;
+		}
+		iframe
+		{
+			width: 49%;
+			float: left;
+			height: 300px;
+			border: 1px solid black;
+			border-left: 0px;
+		}
+		</style>
+	</head>
+	<body>
+		<form action="admin/cms/editar/<?php echo $pagina; ?>" method="post">
+			<p>
+				<label>Pagina:</label>
+				<input name="pagina" type="text" value="<?php echo $pagina; ?>" />
+			</p>
+			<p>
+				<label>Versión:</label>
+				<?php echo ++$version; ?>
+			</p>
+			<p>
+				<textarea id="code" name="codigo"><?php echo $fichero; ?></textarea>
+				<iframe id="preview"></iframe>
+			</p>
+			<p>
+				<button class="wymupdate type="submit">Salvar</button>
+			</p>
+		</form>
+		<script>
+		var delay;
+		// Initialize CodeMirror editor with a nice html5 canvas demo.
+		var editor = CodeMirror.fromTextArea(document.getElementById('code'),
+		{
+			mode: 'text/html',
+			tabMode: 'indent',
+			onChange: function()
+			{
+				clearTimeout(delay);
+				delay = setTimeout(updatePreview, 300);
+			}
+		} );
+		
+		function updatePreview()
+		{
+			var previewFrame = document.getElementById('preview');
+			var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+			preview.open();
+			preview.write(editor.getValue());
+			preview.close();
+		}
+		setTimeout(updatePreview, 300);
+		</script>
+	</body>
+</html>
