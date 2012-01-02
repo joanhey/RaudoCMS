@@ -40,7 +40,7 @@ class CmsController extends AppController
 		$this->fichero = Load::model( 'ficheros' )->leerFichero( $this->parameters );
 		$this->version = Load::model( 'versiones' )->leyendo( $this->parameters );
 		
-		View::select( 'wyn' );
+		View::select( 'codemirror' );
 	}
 	
 	/*public function codigo( $vista )
