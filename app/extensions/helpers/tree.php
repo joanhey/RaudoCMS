@@ -1,8 +1,7 @@
 <?php
 
-function _tree( $ficheros, $raiz )
+function _tree( $ficheros )
 {
-	#_::stop($ficheros);
 	if ( empty( $ficheros ) ) return;
 	
 	$s = '';
@@ -12,13 +11,13 @@ function _tree( $ficheros, $raiz )
 		if ( is_array( $v ) or ! $v )
 		{
 			$s .= "<li>" . basename( $k ) . "/</li>";
-			$s .= _tree( $v, $raiz );	
-			$directorio .= str_replace( $raiz, '', $k ) . '/';
+			$s .= _tree( $v );	
+			$directorio .= str_replace( APP_PATH . 'views/pages/', '', $k ) . '/';
 		}
 		else
 		{
 			
-			$s .= "<li><a href=\"admin/cms/ver?f=$directorio$v\">$v</a></li>";
+			$s .= "<li><a href=\"admin/cms/editar/$directorio$v\">$v</a></li>";
 		}
 	}
 	return "<ul id=\"$k\">$s</ul>";

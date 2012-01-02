@@ -8,35 +8,48 @@
 
 class CmsController extends AppController 
 {
-	/*protected function before_filter()
+	protected function before_filter()
 	{
+	    $this->limit_params = false;
+		
 		if ( Input::isAjax() ) View::template( NULL );
-    }*/
+    }
 
 	public function index()
 	{
 		$this->ficheros = Load::model( 'ficheros' )->leerDirectorio();
-		$this->raiz = APP_PATH . 'views/pages/';
 	}
 
-	public function ver( $vista='' )
+	public function ver()
 	{
-		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
-		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
-		if ( preg_match( '/(ace|codemirror)/', $vista ) ) View::select( $vista, NULL );
+		$pagina = join( '/', $this->parameters );		
+		$pagina = basename( $pagina, '.phtml' );
+		
+		View::setPath( 'pages/' );
+		View::select( $pagina, NULL );
 	}
 
     public function editar()
-	{
-		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
-		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
-
-		if ( ! empty( $_GET['f'] ) )
+	{		
+		$this->fichero = Load::model( 'ficheros' )->leerFichero( $this->parameters );
+		$this->version = Load::model( 'versiones' )->leyendo( $this->parameters );
+		
+		View::select( 'codemirror', NULL );
+		
+		/*if ( ! empty( $_GET['f'] ) )
 		{
 			Load::model( 'versiones' )->editando( $_GET, $_POST );			
 			return Router::redirect( "/admin/cms/ver?f={$_GET['f']}" );
 		}
-		return Router::redirect( '/admin/cms' );
+		
+		if ( ! empty( $_POST['codigo'] ) )
+		{
+			$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
+			$this->version = Load::model( 'versiones' )->leyendo( $_GET );
+			Load::model( 'versiones' )->editando( $_GET, $_POST );			
+			return Router::redirect( "/admin/cms/ver?f={$_GET['f']}" );
+		}*/
+		#return Router::redirect( '/admin/cms' );
 	}
 	
 	/*public function codigo( $vista )
