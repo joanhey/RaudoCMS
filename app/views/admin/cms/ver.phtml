@@ -1,9 +1,6 @@
 
-<form action="/admin/pagina" method="post">
-	<p>
-		<label>RUTA:</label>
-		<input name="pagina" value="<?php echo $ruta; ?>" type="text">
-	</p>
+<h2><?php echo $_GET['f']; ?></h2>
+<form action="admin/cms/editar?f=<?php echo $_GET['f']; ?>" method="post">
 	<p>
 		<label>VERSIÓN:</label>
 		<?php echo ++$version; ?>

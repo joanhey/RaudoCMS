@@ -22,8 +22,20 @@ class CmsController extends AppController
 	public function ver()
 	{
 		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
-		$this->ruta = $_GET['f'];
 		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
+	}
+
+    public function editar()
+	{
+		$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
+		$this->version = Load::model( 'versiones' )->leyendo( $_GET );
+
+		if ( ! empty( $_GET['f'] ) )
+		{
+			Load::model( 'versiones' )->editando( $_GET, $_POST );			
+			return Router::redirect( "/admin/cms/ver?f={$_GET['f']}" );
+		}
+		return Router::redirect( '/admin/cms' );
 	}
 	
 	/*public function codigo( $vista )

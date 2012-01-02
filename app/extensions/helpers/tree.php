@@ -13,12 +13,12 @@ function _tree( $ficheros, $raiz )
 		{
 			$s .= "<li>" . basename( $k ) . "/</li>";
 			$s .= _tree( $v, $raiz );	
-			$directorio .= str_replace( $raiz, '', $k );
+			$directorio .= str_replace( $raiz, '', $k ) . '/';
 		}
 		else
 		{
 			
-			$s .= "<li><a href=\"admin/cms/ver?f=$directorio/$v\">$v</a></li>";
+			$s .= "<li><a href=\"admin/cms/ver?f=$directorio$v\">$v</a></li>";
 		}
 	}
 	return "<ul id=\"$k\">$s</ul>";
