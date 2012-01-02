@@ -1,6 +1,6 @@
 
-<h2><?php echo $_GET['f']; ?></h2>
-<form action="admin/cms/editar?f=<?php echo $_GET['f']; ?>" method="post">
+<h2><?php echo $pagina; ?></h2>
+<form action="admin/cms/editar/<?php echo $pagina; ?>" method="post">
 	<p>
 		<label>VERSIÓN:</label>
 		<?php echo ++$version; ?>
@@ -21,6 +21,7 @@ $( '.wymeditor' ).wymeditor(
 	stylesheet: 'web.css',
     skin: 'twopanels'
 });
+/*
 // BOTON ACE
 $( 'button.ace' ).on( 'click', function()
 {
@@ -31,4 +32,5 @@ $( 'button.codemirror' ).on( 'click', function()
 {
 	location = 'admin/cms/ver/codemirror?f=<?php echo $_GET['f']; ?>';
 });
+*/
 </script>

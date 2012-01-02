@@ -30,26 +30,17 @@ class CmsController extends AppController
 	}
 
     public function editar()
-	{		
+	{			
+		if ( ! empty( $_POST['codigo'] ) )
+		{
+			Load::model( 'versiones' )->editando( $this->parameters, $_POST );			
+		}
+
+		$this->pagina = join( '/', $this->parameters );		
 		$this->fichero = Load::model( 'ficheros' )->leerFichero( $this->parameters );
 		$this->version = Load::model( 'versiones' )->leyendo( $this->parameters );
 		
-		View::select( 'codemirror', NULL );
-		
-		/*if ( ! empty( $_GET['f'] ) )
-		{
-			Load::model( 'versiones' )->editando( $_GET, $_POST );			
-			return Router::redirect( "/admin/cms/ver?f={$_GET['f']}" );
-		}
-		
-		if ( ! empty( $_POST['codigo'] ) )
-		{
-			$this->fichero = Load::model( 'ficheros' )->leerFichero( $_GET );
-			$this->version = Load::model( 'versiones' )->leyendo( $_GET );
-			Load::model( 'versiones' )->editando( $_GET, $_POST );			
-			return Router::redirect( "/admin/cms/ver?f={$_GET['f']}" );
-		}*/
-		#return Router::redirect( '/admin/cms' );
+		View::select( 'wyn' );
 	}
 	
 	/*public function codigo( $vista )
