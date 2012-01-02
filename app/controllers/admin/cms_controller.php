@@ -33,46 +33,31 @@ class CmsController extends AppController
 	{			
 		if ( ! empty( $_POST['pagina'] ) and ! empty( $_POST['codigo'] ) )
 		{
-			Load::model( 'versiones' )->editando( $_POST['pagina'], $_POST['codigo'] );			
+			Load::model( 'ficheros' )->salvarFichero( $_POST['pagina'], $_POST['codigo'] );			
 			$this->fichero = Load::model( 'ficheros' )->leerFichero( $_POST['pagina'] );
-			$this->version = Load::model( 'versiones' )->leyendo( $_POST['pagina'] );
+			$this->version = Load::model( 'versiones' )->obtenerVersion( $_POST['pagina'] );
 			$this->pagina = $_POST['pagina'];		
 		}
 		else
 		{
-			$pagina = join( '/', $this->parameters );		
-			$this->pagina = $pagina;		
-			$this->fichero = Load::model( 'ficheros' )->leerFichero( $pagina );
-			$this->version = Load::model( 'versiones' )->leyendo( $pagina );
+			$pagina = join( '/', $this->parameters );
+			$this->fichero = ( $pagina ) ? Load::model( 'ficheros' )->leerFichero( $pagina ) : '';
+			$this->version = ( $pagina ) ? Load::model( 'versiones' )->obtenerVersion( $pagina ) : '';
+			$this->pagina = ( $pagina ) ? $pagina : '';		
 		}
 		View::select( 'codemirror' );
 	}
-	
-	/*public function codigo( $vista )
-	{
-		$this->pagina = $_GET['f'];
-		$this->codigo = file_get_contents( $this->pagina );
-		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
-		View::select( $vista, NULL );
+
+    public function borrar()
+	{			
+		$pagina = join( '/', $this->parameters );
+		if ( $pagina )
+		{
+			Load::model( 'ficheros' )->borrarFichero( $pagina );			
+			$this->fichero = '';
+			$this->version = '';
+			$this->pagina = '';		
+		}
+		View::select( 'codemirror' );
 	}
-	
-	public function pagina()
-	{
-		// $_GET['f'] deberia llamarse item o similar
-		$this->dir = dirname( $_GET['f'] );
-		$this->pagina = basename( $_GET['f'] );
-		$this->codigo = file_get_contents( $_GET['f'] );
-		$this->codigo = htmlspecialchars( $this->codigo, ENT_QUOTES, APP_CHARSET );
-		$this->version = Load::model( 'versiones' )->leyendo( $this->dir, $this->pagina );
-	}
-	
-	public function paginas()
-	{
-		if ( empty( $_GET['f'] ) ) $_GET['f'] = APP_PATH . 'views/pages';
-		$dir = is_dir( $_GET['f'] ) ? $_GET['f'] : dirname( $_GET['f'] );
-		$dir = '/' . ltrim( $dir, '/' );
-		$this->items = _fs::readDir( $dir );
-		$this->dad = $dir == '/' ? '' : $dir;
-		$this->up = ( empty( $_REQUEST['up'] ) or $_GET['f'] == APP_PATH . 'views/pages' )? 0 : 1;
-	}*/
 }

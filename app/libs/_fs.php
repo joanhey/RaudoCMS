@@ -93,7 +93,7 @@ class _fs
 	
     static public function readFile($file)
     {
-        if ( ! file_exists($file) ) return $file . ' no exists!';
+        if ( ! file_exists($file) ) return "$file no exists!";
 
         if ( is_dir($file) ) return self::readFile($file);
 
@@ -103,7 +103,7 @@ class _fs
 	# 2012
     static public function createFile( $file, $data='' )
     {
-		if ( file_exists( $file ) ) return $file . ' exists!';
+		if ( file_exists( $file ) ) return "$file exists!";
 
 		$dir = dirname( $file );
 		if ( ! file_exists( $dir ) ) self::createDir( $dir );
@@ -114,7 +114,7 @@ class _fs
 	# 2012
     static public function updateFile( $file, $data )
     {
-		if ( ! file_exists( $file ) ) return $file . ' no exists!';
+		if ( ! file_exists( $file ) ) return "$file no exists!";
 	
 		return file_put_contents( $file, $data );
     }
@@ -130,11 +130,12 @@ class _fs
         return unlink($file);
     }
 
-    static public function deleteDir($dir)
+	# 2012
+    static public function deleteDir( $dir ) 
     {
-		if ( ! file_exists($dir) ) return 0; # SI NO EXISTE NO HAY MAS QUE HACER
+		if ( ! file_exists( $dir ) ) return "$dir no exists!";
 		
-		if ( ! self::readDir($dir) ) rmdir($dir); # SI ESTA VACIO SE BORRA
+		if ( ! self::readDir( $dir ) ) rmdir( $dir );
     }
 	
     static public function copyFile($from, $to)

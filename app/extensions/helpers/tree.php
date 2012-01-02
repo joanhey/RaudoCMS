@@ -2,7 +2,6 @@
 
 function _tree( $ficheros, $padre='' )
 {
-	#_::stop($ficheros);
 	if ( empty( $ficheros ) ) return;
 	
 	$s = '';
@@ -11,8 +10,8 @@ function _tree( $ficheros, $padre='' )
 		if ( is_array( $v ) or ! $v )
 		{
 			$s .= "<li>" . basename( $k ) . "/</li>";
-			$directorio = str_replace( APP_PATH . "views/pages/", '', $k ) . '/';
-			$s .= _tree( $v, $directorio );	
+			$futuro_padre = str_replace( APP_PATH . "views/pages/", '', $k ) . '/';
+			$s .= _tree( $v, $futuro_padre );	
 		}
 		else
 		{			
