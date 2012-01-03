@@ -1,9 +1,11 @@
 
 <div id="file_manager">
 	<ul class="file_manager"></ul>
-</div>          
-<script type="text/javascript">
+</div>
+
+<script>
 get_dir( '<?php echo $dir; ?>' );
+
 function get_dir( dir )
 {
 	if ( dir ) // AQUI FALTA COMPARAR DIR CON LA BASE PARA NO PONER LOS ..
@@ -14,7 +16,6 @@ function get_dir( dir )
 		{
 			$( function()
 			{
-				$( '#codigo' ).load( '/admin/cms/codigo?dir='+dir );
 				$( '#pagina' ).load( '/admin/cms/pagina?dir='+dir );
 			});
 		}
@@ -52,7 +53,6 @@ function get_dir( dir )
     $( '.file > a' ).live( 'click', function( e )
     {
         e.preventDefault();
-		$( '#codigo' ).load( '/admin/cms/codigo?dir='+this.rel );
 		$( '#pagina' ).load( '/admin/cms/pagina?dir='+this.rel );
     } );
 }    

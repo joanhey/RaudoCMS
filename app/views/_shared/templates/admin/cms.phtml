@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <base href="/RaudoCMS/" />
         <meta charset="<?php echo APP_CHARSET ?>" />
         <title>RaudoCMS</title>
-        <?php Tag::css('cms') ?>
+        <?php Tag::css( 'cms' ) ?>
         <?php echo Html::includeCss() ?>
-  		<?php echo Tag::js( 'jquery/jquery.min' ); ?>
+ 		<?php echo Tag::js( 'jquery/jquery.min' ); ?>
   		<?php echo Tag::js( 'wymeditor/jquery.wymeditor' ); ?>
     </head>
     <body>
@@ -13,21 +14,7 @@
             <h1>RaudoCMS | Administración</h1>
             <hr />
         </header>
-        <aside>
-            <h3>Páginas:</h3>
-            <?php View::partial( 'admin/file_manager', false, get_object_vars( $controller ) ); ?>
-            <hr />
-       </aside>
-        <section>
-            <h3>Código:</h3>
-            <div id="codigo"></div>
-            <hr />
-       </section>
-        <section>
-            <h3>Página:</h3>
-            <div id="pagina"></div>
-            <hr />
-        </section>
+        <?php View::content(); ?></div>
         <footer>
             <p>© RaudoCMS 2011</p>
         </footer>

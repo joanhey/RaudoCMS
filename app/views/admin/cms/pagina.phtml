@@ -1,3 +1,45 @@
-<?php
 
-echo $pagina;
+<form action="/admin/pagina" method="post">
+	<p>
+		<label>DIR:</label>
+		<input name="dir" value="<?php echo $dir; ?>" size="69" type="text">
+	</p>
+	<p>
+		<label>PÁGINA:</label>
+		<input name="pagina" value="<?php echo $pagina; ?>" size="15" type="text">
+	</p>
+	<p>
+		<label>VERSIÓN:</label>
+		<?php echo ++$version; ?>
+	</p>
+	<p>
+		<textarea class="wymeditor" name="codigo"><?php echo $codigo; ?></textarea>
+	</p>
+	<p>
+		<button class="wymupdate type="submit">Salvar</button>
+		<button class="ace" type="button">Ace</button>
+		<button class="codemirror" type="button">Codemirror</button>
+	</p>
+</form>
+
+<script>
+$( '.wymeditor' ).wymeditor(
+{
+	stylesheet: 'web.css',
+    skin: 'twopanels'
+});
+// BOTON ACE
+$( 'button.ace' ).on( 'click', function()
+{
+	var dir = $( 'input[name="dir"]' ).val();
+	var pagina = $( 'input[name="pagina"]' ).val();
+	location = '/admin/cms/codigo/ace?dir='+dir+'/'+pagina;
+});
+// BOTON CODEMIRROR
+$( 'button.codemirror' ).on( 'click', function()
+{
+	var dir = $( 'input[name="dir"]' ).val();
+	var pagina = $( 'input[name="pagina"]' ).val();
+	location = '/admin/cms/codigo/codemirror?dir='+dir+'/'+pagina;
+});
+</script>
