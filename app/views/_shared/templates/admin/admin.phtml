@@ -12,7 +12,15 @@
     <div class="container-fluid"><?php echo Html::link('admin/', 'RaudoCMS','class="brand" title="RaudoCMS | Administración"') ?>
         <ul class="nav">
                 <li><?php echo Html::link('admin/paginas/','Páginas') ?></li>
-                <li><?php echo Html::link('admin/status/','Status') ?></li>
+                <li class="dropdown" data-dropdown="dropdown">
+			<a class="dropdown-toggle" href="#">Status</a>
+			<ul class="dropdown-menu">
+				<li><?php echo Html::link('admin/status/','Info') ?></li>
+				<li><?php echo Html::link('admin/status/test','Test bt') ?></li>
+				<li class="divider"></li>
+				<li><?php echo Html::link('admin/status/agradecimientos','Agradecimientos') ?></li>
+			</ul>
+		</li>
                 <li><?php echo Html::link('admin/usuarios/','Usuarios') ?></li>
                 <li><a href="admin/usuarios/salir">Salir usuario foto</a></li>
         </ul>
@@ -25,5 +33,9 @@
     <p>© 2012 RaudoCMS</p>
     <p><?php echo 'Tiempo: '.round((microtime(1)-START_TIME),4).' seg.'; echo ', Memoria Usada: '.number_format(memory_get_usage() / 1048576, 2).' MB' ?></p>
     </div>
+<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<?php echo Tag::js('bootstrap-dropdown');
+echo Tag::js('bootstrap-twipsy');
+echo Tag::js('bootstrap-alerts') ?>
 </body>
 </html>

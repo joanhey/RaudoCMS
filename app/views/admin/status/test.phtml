@@ -1,16 +1,18 @@
 <h1>Test del bootstrap de Twitter</h1>
-<h2>Mensajes Flash:: (igual que siempre)</h2>
+<h2>Mensajes</h2>
+<h3>Flash:: (igual que siempre)</h3>
 <?php
 Flash::valid('<strong>RaudoCMS</strong> va perfecto !');
 Flash::error('<strong>Error</strong> en xxx');
 Flash::warning('<strong>Alerta:</strong> en su config.');
 Flash::info('<strong>RaudoCMS</strong> tu próximo CMS');
 ?>
-<h2>Etiquetas Bt::label('texto','tipo-opcional')</h2>
+<h2>Etiquetas</h2>
+<h3>Bt::label('texto','tipo-opcional')</h3>
 <?php
-Bt::label('Default');
-Bt::label('Nuevo','success');
-Bt::label('Alerta','warning');
+echo 'Bt::label("Default") ', Bt::label('Default'), '<br />';
+echo 'Bt::label("Nuevo","success") ', Bt::label('Nuevo','success'), '<br />';
+echo 'Bt::label("Alerta","warning") ', Bt::label('Alerta','warning'), '<br />';
 Bt::label('Importante','important');
 Bt::label('Información','notice');
 
