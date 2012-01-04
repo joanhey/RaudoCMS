@@ -17,7 +17,7 @@ class Ra {
 			}
 			else
 			{			
-				echo '<li>' , Html::link("admin/cms/editar/$padre$v", $v) , '</li>';
+				echo '<li>' , Html::link("admin/paginas/editar/$padre$v", $v) , '</li>';
 			}
 		}
 		return "<ul id=\"$k\">$s</ul>";

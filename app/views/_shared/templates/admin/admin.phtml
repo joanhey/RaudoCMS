@@ -9,21 +9,21 @@
 </head>
 <body>
     <div class="topbar" data-scrollspy="scrollspy"><div class="topbar-inner">
-    <div class="container-fluid"><a class="brand" href="#" title="RaudoCMS Administración">RaudoCMS</a>
+    <div class="container-fluid"><?php echo Html::link('admin/', 'RaudoCMS','class="brand" title="RaudoCMS | Administración"') ?>
         <ul class="nav">
-                <li><a href="">Ir a web</a></li>
-                <li><a href="">xxxx</a></li>
-                <li><a href="">zzzz</a></li>
+                <li><?php echo Html::link('admin/paginas/','Páginas') ?></li>
+                <li><?php echo Html::link('admin/status/','Status') ?></li>
+                <li><?php echo Html::link('admin/usuarios/','Usuarios') ?></li>
                 <li><a href="admin/usuarios/salir">Salir usuario foto</a></li>
         </ul>
     </div>
     </div></div>
     <div class='container'>
-        <?php View::content(); ?>
+        <?php View::content() ?>
 
         <?php //View::partial('kumbia/footer') ?>
     <p>© 2012 RaudoCMS</p>
-    <p><?php echo 'Tiempo: '.round((microtime(1)-START_TIME),4).' seg.'; echo ', Memoria Usada: '.number_format(memory_get_usage() / 1048576, 2).' MB';?></p>
+    <p><?php echo 'Tiempo: '.round((microtime(1)-START_TIME),4).' seg.'; echo ', Memoria Usada: '.number_format(memory_get_usage() / 1048576, 2).' MB' ?></p>
     </div>
 </body>
 </html>
