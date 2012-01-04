@@ -6,7 +6,7 @@
  */
 
 
-class PaginaController extends AppController 
+class PaginaController extends AadminController 
 {
 	public function index()
 	{

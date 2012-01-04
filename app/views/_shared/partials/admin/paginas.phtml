@@ -1,8 +1,10 @@
 <?php
 
-View::helpers( 'tree' );
+echo Ra::tree($ficheros);
 
-echo _tree( $ficheros );
+//View::helpers( 'tree' );
+
+//echo _tree( $ficheros );
 
 
 /*if ( $a['directorio'] and $a['directorio'] <> '/' ) echo "<li class=\"directory up\"><a href=\"?d={$a['padre']}\">..</a></li>";

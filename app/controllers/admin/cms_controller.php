@@ -6,7 +6,7 @@
  */
 
 
-class CmsController extends AppController 
+class CmsController extends AdminController 
 {
 	protected function before_filter()
 	{

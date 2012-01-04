@@ -3,7 +3,7 @@
  * Administración
  * 
  */
-class IndexController extends AppController 
+class IndexController extends AdminController 
 {
 	public function index()
 	{
